@@ -1,0 +1,19 @@
+<%= form_for(message) do |form| %>
+  <% if message.errors.any? %>
+    <div class="error-message">
+      <%= message.errors.full_messages.to_sentence.capitalize %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <p><%= form.label :content, 'Type a new message', class: "form-label" %></p>
+    <p><%= form.text_area :content, class: "form-control bg-body-tertiary", autofocus: true %></p>
+  </div>
+
+  <%= form.hidden_field :chatroom_id, value: @chatroom.id %>
+
+  <div>
+    <%= form.submit "Send Message" %>
+  </div>
+<% end %>
+
