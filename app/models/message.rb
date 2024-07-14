@@ -4,5 +4,7 @@ class Message < ApplicationRecord
 
   validates :content, presence: true, allow_blank: false
 
-  after_create_commit -> { broadcast_append_to "messages", partial: "messages/message", locals: { message: self }, target: "messages" }
+  #after_create_commit ->(message) { broadcast_append_to "messages_#{message.chatroom.name}", partial: "messages/message", locals: { message: self }, target: "messages_#{message.chatroom.name}" }
+
+  broadcasts_to ->(message) { [message.chatroom, "messages"] }, inserts_by: :append
 end

@@ -1,4 +1,4 @@
-<%= turbo_stream_from "messages" %>
+<%= turbo_stream_from @chatroom, "messages" %>
 
 <div class="container py-5">
   Hello and Welcome to <%= @chatroom.name %>
